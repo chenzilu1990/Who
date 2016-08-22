@@ -25,8 +25,12 @@ class SBGameCell: UITableViewCell {
         
         set{
             
-            nameLabel.text = newValue?.name
-            msgBtn.hidden = (newValue?.isRead)!
+            func setupPlayer() {
+                nameLabel.text = newValue?.name
+                msgBtn.hidden = (newValue?.isRead)!
+            }
+            
+            setupPlayer()
             
 
 

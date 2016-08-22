@@ -219,10 +219,7 @@ class SBGameVC: UITableViewController, UIAlertViewDelegate, SBWordDisplayVCDeleg
         tableView.reloadData()
     }
     
-    
-    
-//    MARK : 其他
-    
+  
     
     
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {

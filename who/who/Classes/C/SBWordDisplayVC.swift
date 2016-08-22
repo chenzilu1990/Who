@@ -33,14 +33,14 @@ class SBWordDisplayVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        func setupNavBar() {
+            navigationItem.leftBarButtonItem = leftItem
+        }
         setupNavBar()
         
         wordLabel.text = word
     }
     
-    func setupNavBar() {
-        navigationItem.leftBarButtonItem = leftItem
-    }
     
     
     @IBAction func remeberBtnDidClick(sender: AnyObject) {
