@@ -18,7 +18,6 @@
 		9756A0151D3A1CAC004757BC /* SBWordDisplayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9756A0131D3A1CAC004757BC /* SBWordDisplayVC.swift */; };
 		9756A0161D3A1CAC004757BC /* SBWordDisplayVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9756A0141D3A1CAC004757BC /* SBWordDisplayVC.xib */; };
 		9756A0181D3A1D99004757BC /* SBCircleBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9756A0171D3A1D99004757BC /* SBCircleBtn.swift */; };
-		9756A01B1D3A1DC9004757BC /* SBGameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9756A0191D3A1DC9004757BC /* SBGameCell.swift */; };
 		9756A01C1D3A1DC9004757BC /* SBGameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9756A01A1D3A1DC9004757BC /* SBGameCell.xib */; };
 		9756A01E1D3A1E10004757BC /* SBRandom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9756A01D1D3A1E10004757BC /* SBRandom.swift */; };
 		9756A0201D3A1E36004757BC /* SBAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9756A01F1D3A1E36004757BC /* SBAudioPlayer.swift */; };
@@ -45,7 +44,6 @@
 		9756A0131D3A1CAC004757BC /* SBWordDisplayVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBWordDisplayVC.swift; sourceTree = "<group>"; };
 		9756A0141D3A1CAC004757BC /* SBWordDisplayVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBWordDisplayVC.xib; sourceTree = "<group>"; };
 		9756A0171D3A1D99004757BC /* SBCircleBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBCircleBtn.swift; sourceTree = "<group>"; };
-		9756A0191D3A1DC9004757BC /* SBGameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBGameCell.swift; sourceTree = "<group>"; };
 		9756A01A1D3A1DC9004757BC /* SBGameCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBGameCell.xib; sourceTree = "<group>"; };
 		9756A01D1D3A1E10004757BC /* SBRandom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBRandom.swift; sourceTree = "<group>"; };
 		9756A01F1D3A1E36004757BC /* SBAudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBAudioPlayer.swift; sourceTree = "<group>"; };
@@ -155,7 +153,6 @@
 				9712FA7E1D54B74900C39153 /* SBPlayerCell.swift */,
 				9712FA7F1D54B74900C39153 /* SBPlayerCell.xib */,
 				9756A0171D3A1D99004757BC /* SBCircleBtn.swift */,
-				9756A0191D3A1DC9004757BC /* SBGameCell.swift */,
 				9756A01A1D3A1DC9004757BC /* SBGameCell.xib */,
 			);
 			path = V;
@@ -246,7 +243,6 @@
 				9756A0151D3A1CAC004757BC /* SBWordDisplayVC.swift in Sources */,
 				9756A0201D3A1E36004757BC /* SBAudioPlayer.swift in Sources */,
 				97C1936A1D3539B200CE79E8 /* SBPlayerListVC.swift in Sources */,
-				9756A01B1D3A1DC9004757BC /* SBGameCell.swift in Sources */,
 				9756A00D1D3A1BDC004757BC /* SBGameSetVC.swift in Sources */,
 				9756A0071D3A17DC004757BC /* SBPlayerVC.swift in Sources */,
 				9756A01E1D3A1E10004757BC /* SBRandom.swift in Sources */,
