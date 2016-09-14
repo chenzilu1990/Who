@@ -23,13 +23,13 @@ class SBGameVC: UITableViewController, UIAlertViewDelegate, SBWordDisplayVCDeleg
     lazy var WDPlayers = [SBPlayer]()
     lazy var PMPlayers = [SBPlayer]()
     lazy var audioPlayer = SBAudioPlayer()
-    lazy var outPlayerIndex = NSIndexPath()
+    lazy var outPlayerIndex = IndexPath()
     
     var words : [[String : String]]{
         
         func getWords() -> NSArray? {
-            let path1 = NSBundle.mainBundle().bundlePath
-            let path2 = path1.stringByAppendingString("/word130.plist")
+            let path1 = Bundle.main.bundlePath
+            let path2 = path1 + "/word130.plist"
             
             return NSArray.init(contentsOfFile: path2)
         }
@@ -41,7 +41,7 @@ class SBGameVC: UITableViewController, UIAlertViewDelegate, SBWordDisplayVCDeleg
     
     lazy var refreshItem : UIBarButtonItem = {
        
-        let item = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: #selector(SBGameVC.gameRefresh))
+        let item = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.refresh, target: self, action: #selector(SBGameVC.gameRefresh))
         return item
         
     }()
@@ -57,7 +57,7 @@ class SBGameVC: UITableViewController, UIAlertViewDelegate, SBWordDisplayVCDeleg
         super.viewDidLoad()
         
         func setupTableView() {
-            tableView.registerNib(UINib.init(nibName: "SBGameCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: ID)
+            tableView.register(UINib.init(nibName: "SBGameCell", bundle: Bundle.main), forCellReuseIdentifier: ID)
             tableView.tableFooterView = UIView.init()
             tableView.backgroundColor = UIColor.init(white: 0.95, alpha: 1)
             
@@ -88,7 +88,7 @@ class SBGameVC: UITableViewController, UIAlertViewDelegate, SBWordDisplayVCDeleg
         
         let dic = words[a]
         
-        for (idx , player) in (players?.enumerate())! {
+        for (idx , player) in (players?.enumerated())! {
             if arr.contains(idx) {
                 player.word = dic["WD"]
                 player.isWD = true
@@ -105,8 +105,8 @@ class SBGameVC: UITableViewController, UIAlertViewDelegate, SBWordDisplayVCDeleg
         
         let alert = UIAlertView.init(title: "更新词汇...", message: nil, delegate: nil, cancelButtonTitle: nil)
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
-            alert.dismissWithClickedButtonIndex(0, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1 * NSEC_PER_SEC)) / Double(NSEC_PER_SEC)) {
+            alert.dismiss(withClickedButtonIndex: 0, animated: true)
         }
         
         alert.show()
@@ -117,7 +117,7 @@ class SBGameVC: UITableViewController, UIAlertViewDelegate, SBWordDisplayVCDeleg
     
     
     // MARK: - Table view data source
-     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if let count = curPlayers?.count {
             return count
@@ -129,18 +129,18 @@ class SBGameVC: UITableViewController, UIAlertViewDelegate, SBWordDisplayVCDeleg
         
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let playerCell = tableView.dequeueReusableCellWithIdentifier(ID) as! SBGameCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let playerCell = tableView.dequeueReusableCell(withIdentifier: ID) as! SBGameCell
         
-        playerCell.player = curPlayers![indexPath.row]
+        playerCell.player = curPlayers![(indexPath as NSIndexPath).row]
         
         
         return playerCell
         
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let player = curPlayers![indexPath.row]
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let player = curPlayers![(indexPath as NSIndexPath).row]
         player.isRead = true
         let vc = SBWordDisplayVC()
         vc.navigationItem.title = player.name
@@ -153,20 +153,20 @@ class SBGameVC: UITableViewController, UIAlertViewDelegate, SBWordDisplayVCDeleg
     }
     
     
-    override func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
+    override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "处死"
     }
     
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         outPlayerIndex = indexPath
         
-        func pandunWithIndex(indexPath : NSIndexPath) {
-            let player = curPlayers![indexPath.row]
-            curPlayers?.removeAtIndex((curPlayers?.indexOf(player))!)
+        func pandunWithIndex(_ indexPath : IndexPath) {
+            let player = curPlayers![(indexPath as NSIndexPath).row]
+            curPlayers?.remove(at: (curPlayers?.index(of: player))!)
             
             if (player.isWD)! == true {
-                WDPlayers.removeAtIndex((WDPlayers.indexOf(player))!)
+                WDPlayers.remove(at: (WDPlayers.index(of: player))!)
                 
                 if WDPlayers.count == 0 {
                     isGameOver = true
@@ -188,7 +188,7 @@ class SBGameVC: UITableViewController, UIAlertViewDelegate, SBWordDisplayVCDeleg
                 
             } else {
                 
-                PMPlayers.removeAtIndex((PMPlayers.indexOf(player))!)
+                PMPlayers.remove(at: (PMPlayers.index(of: player))!)
                 
                 if PMPlayers.count == WDPlayers.count {
                     isGameOver = true
@@ -222,16 +222,16 @@ class SBGameVC: UITableViewController, UIAlertViewDelegate, SBWordDisplayVCDeleg
   
     
     
-    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+    func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
         if isGameOver == true {
             if buttonIndex == 0 {
                 gameRefresh()
             } else {
-                navigationController?.popViewControllerAnimated(true)
+                navigationController?.popViewController(animated: true)
             }
         } else {
             
-            tableView.deleteRowsAtIndexPaths([outPlayerIndex], withRowAnimation: UITableViewRowAnimation.Top)
+            tableView.deleteRows(at: [outPlayerIndex], with: UITableViewRowAnimation.top)
             
             audioPlayer.stop()
             
@@ -264,7 +264,7 @@ class SBGameCell: UITableViewCell {
             
             func setupPlayer() {
                 nameLabel.text = newValue?.name
-                msgBtn.hidden = (newValue?.isRead)!
+                msgBtn.isHidden = (newValue?.isRead)!
             }
             
             setupPlayer()

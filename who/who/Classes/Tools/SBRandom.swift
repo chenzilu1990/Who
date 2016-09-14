@@ -11,7 +11,7 @@ import UIKit
 class SBRandom: NSObject {
     
     
-    func randomWithRange( range : Int , count: Int) ->  Array <Int> {
+    func randomWithRange( _ range : Int , count: Int) ->  Array <Int> {
         
         var rangeV = range
         var countV = count
@@ -30,7 +30,7 @@ class SBRandom: NSObject {
         while countV > 0 {
             let num = arc4random_uniform(UInt32(rangeV))
             result.append(arrM[Int(num)])
-            arrM.removeAtIndex(Int(num))
+            arrM.remove(at: Int(num))
             rangeV -= 1
             countV -= 1
         }

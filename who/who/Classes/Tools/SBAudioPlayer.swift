@@ -13,14 +13,14 @@ class SBAudioPlayer: NSObject {
 
     var curAudio : AVAudioPlayer?
     
-    func playerWithName(name : String) {
+    func playerWithName(_ name : String) {
         
-        let url = NSBundle.mainBundle().URLForResource(name, withExtension: nil)
+        let url = Bundle.main.url(forResource: name, withExtension: nil)
         
         if let urlE = url {
             
             do{
-                let audio = try AVAudioPlayer.init(contentsOfURL: urlE)
+                let audio = try AVAudioPlayer.init(contentsOf: urlE)
                 
                 audio.enableRate = true
                 audio.prepareToPlay()

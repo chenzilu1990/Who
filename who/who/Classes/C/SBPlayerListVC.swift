@@ -8,14 +8,14 @@
 
 import UIKit
 
-let ScreenFrame = UIScreen.mainScreen().bounds
+let ScreenFrame = UIScreen.main.bounds
 
 let ID = "playerCell"
 
-let APPCache = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true).first
+let APPCache = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first
 
 
-let playerPath = APPCache?.stringByAppendingString("/player.plist")
+let playerPath = (APPCache)! + "/player.plist"
 
 
 
@@ -25,7 +25,7 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         didSet {
             if players.count > 2 {
-                noteLabel.hidden = true
+                noteLabel.isHidden = true
             }
         }
         
@@ -34,7 +34,7 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     lazy var players : [SBPlayer] = {
     
-        let arr = NSKeyedUnarchiver.unarchiveObjectWithFile(playerPath!)
+        let arr = NSKeyedUnarchiver.unarchiveObject(withFile: playerPath)
         
         if let players = arr {
             
@@ -50,7 +50,7 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     lazy var addItem : UIBarButtonItem? = {
     
-        let item = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(SBPlayerListVC.addItemDidClick))
+        let item = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(SBPlayerListVC.addItemDidClick))
         return item
         
        
@@ -59,14 +59,14 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     lazy var editItem : UIBarButtonItem = {
         
-        let item = UIBarButtonItem.init(title: "选择", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SBPlayerListVC.editItemDidClick))
+        let item = UIBarButtonItem.init(title: "选择", style: UIBarButtonItemStyle.plain, target: self, action: #selector(SBPlayerListVC.editItemDidClick))
         return item
         
     }()
     
     lazy var starItem : UIBarButtonItem = {
        
-        let item = UIBarButtonItem.init(title: "开始游戏", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SBPlayerListVC.starItemDidClick))
+        let item = UIBarButtonItem.init(title: "开始游戏", style: UIBarButtonItemStyle.plain, target: self, action: #selector(SBPlayerListVC.starItemDidClick))
         
         return item
     }()
@@ -74,14 +74,14 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     lazy var tableView : UITableView = {
        
-        let tableView = UITableView.init(frame: ScreenFrame, style: UITableViewStyle.Plain)
+        let tableView = UITableView.init(frame: ScreenFrame, style: UITableViewStyle.plain)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: ID)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: ID)
         tableView.rowHeight = 80;
         tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
         tableView.showsVerticalScrollIndicator = false
-        tableView.backgroundColor = UIColor.clearColor()
+        tableView.backgroundColor = UIColor.clear
         tableView.tableFooterView = UIView()
         tableView.allowsSelection = false
         return tableView
@@ -91,7 +91,7 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         view.addSubview(tableView)
         func setupNavBar() {
-            navigationController?.navigationBar.tintColor = UIColor.redColor()
+            navigationController?.navigationBar.tintColor = UIColor.red
             navigationItem.title = "玩家"
             if players.count > 2 {
                 
@@ -106,9 +106,9 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         func setupTooBar() {
             
-            navigationController?.toolbar.tintColor = UIColor.redColor()
+            navigationController?.toolbar.tintColor = UIColor.red
             
-            let item = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+            let item = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
             
             toolbarItems = [item, starItem, item]
             
@@ -120,17 +120,17 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setEditing(false, animated: false)
     }
     
-    override func setEditing(editing: Bool, animated: Bool) {
+    override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-            tableView.editing = editing
+            tableView.isEditing = editing
         if editing == true {
             
-            starItem.enabled = false
+            starItem.isEnabled = false
             selPlayers.removeAll()
 
             navigationItem.rightBarButtonItem = nil
@@ -159,7 +159,7 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         let nav = UINavigationController.init(rootViewController: vc)
         
         
-        presentViewController(nav, animated: true, completion: nil)
+        present(nav, animated: true, completion: nil)
         
         
     }
@@ -170,7 +170,7 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             setEditing(false, animated: true)
         } else {
             
-            setEditing(!editing, animated: true)
+            setEditing(!isEditing, animated: true)
         }
         
     }
@@ -189,18 +189,18 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
 //MARK: 代理
     
-    func playerVCDidSavePlayer(name : String) {
+    func playerVCDidSavePlayer(_ name : String) {
         
         let player = SBPlayer.init(name: name, word: nil)
         players.append(player)
-        NSKeyedArchiver.archiveRootObject(players, toFile: playerPath!)
+        NSKeyedArchiver.archiveRootObject(players, toFile: playerPath)
         func reloadData() {
             tableView .reloadData()
             if players.count > 2 {
-                noteLabel.hidden = true
+                noteLabel.isHidden = true
                 navigationItem.leftBarButtonItem = editItem
             } else {
-                noteLabel.hidden = false
+                noteLabel.isHidden = false
                 navigationItem.leftBarButtonItem = nil
             }
         }
@@ -209,17 +209,17 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return players.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCellWithIdentifier(ID) {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: ID) {
             
-            let player = players[indexPath.row]
+            let player = players[(indexPath as NSIndexPath).row]
             
-            cell.textLabel?.font = UIFont.systemFontOfSize(40)
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 40)
             cell.textLabel?.text = player.name
             
             
@@ -232,43 +232,43 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
-    func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "删除"
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
-        players.removeAtIndex(indexPath.row)
-        NSKeyedArchiver.archiveRootObject(players, toFile: playerPath!)
-        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+        players.remove(at: (indexPath as NSIndexPath).row)
+        NSKeyedArchiver.archiveRootObject(players, toFile: playerPath)
+        tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
         
         
     }
     
-    func tableView(tableView: UITableView, didEndEditingRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
         navigationItem.rightBarButtonItem = addItem
         if players.count > 2 {
-            noteLabel.hidden = true
+            noteLabel.isHidden = true
             editItem.title = "选择"
             } else {
-            noteLabel.hidden = false
+            noteLabel.isHidden = false
             navigationItem.leftBarButtonItem = nil
         }
 
     }
     
     
-    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         
         
-        if tableView.editing == false {
+        if tableView.isEditing == false {
             navigationItem.rightBarButtonItem = nil
             editItem.title = "完成"
             navigationItem.leftBarButtonItem = editItem
 
-            return UITableViewCellEditingStyle.Delete
+            return UITableViewCellEditingStyle.delete
         } else {
-            return UITableViewCellEditingStyle.init(rawValue: UITableViewCellEditingStyle.Delete.rawValue | UITableViewCellEditingStyle.Insert.rawValue)!
+            return UITableViewCellEditingStyle.init(rawValue: UITableViewCellEditingStyle.delete.rawValue | UITableViewCellEditingStyle.insert.rawValue)!
 
         }
         
@@ -279,25 +279,25 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
  
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
 
-        selPlayers.append(players[indexPath.row])
+        selPlayers.append(players[(indexPath as NSIndexPath).row])
         if selPlayers.count > 2 {
-            starItem.enabled = true
+            starItem.isEnabled = true
         } else {
-            starItem.enabled = false
+            starItem.isEnabled = false
         }
     }
     
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
 
-        selPlayers.removeAtIndex(selPlayers.indexOf(players[indexPath.row])!)
+        selPlayers.remove(at: selPlayers.index(of: players[(indexPath as NSIndexPath).row])!)
         
         if selPlayers.count > 2 {
-            starItem.enabled = true
+            starItem.isEnabled = true
         } else {
-            starItem.enabled = false
+            starItem.isEnabled = false
         }
     }
     

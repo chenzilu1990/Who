@@ -25,7 +25,7 @@ class SBWordDisplayVC: UIViewController {
     
     lazy var leftItem : UIBarButtonItem = {
        
-        let item = UIBarButtonItem.init(title: "", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+        let item = UIBarButtonItem.init(title: "", style: UIBarButtonItemStyle.plain, target: self, action: nil)
         return item
         
     }()
@@ -43,8 +43,10 @@ class SBWordDisplayVC: UIViewController {
     
     
     
-    @IBAction func remeberBtnDidClick(sender: AnyObject) {
-        navigationController?.popViewControllerAnimated(true)
+    @IBAction func remeberBtnDidClick(_ sender: AnyObject) {
+ 
+       navigationController?.popViewController(animated: true)
+        
         delegate?.wordDisplayDidRemeberPlayer()
     }
  

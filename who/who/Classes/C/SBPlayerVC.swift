@@ -11,7 +11,7 @@ import UIKit
 
 @objc   protocol SBPlayerVCDelegate : NSObjectProtocol {
     
-    func playerVCDidSavePlayer(name : String)
+    func playerVCDidSavePlayer(_ name : String)
 }
 
 class SBPlayerVC: UIViewController {
@@ -24,17 +24,17 @@ class SBPlayerVC: UIViewController {
     
     
     func cancleItemDidClick() {
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     lazy var cancleItem : UIBarButtonItem = {
-        let item = UIBarButtonItem.init(title: "取消", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SBPlayerVC.cancleItemDidClick))
+        let item = UIBarButtonItem.init(title: "取消", style: UIBarButtonItemStyle.plain, target: self, action: #selector(SBPlayerVC.cancleItemDidClick))
         return item
     }()
     
     
     lazy var saveItem : UIBarButtonItem = {
     
-        let item = UIBarButtonItem.init(title: "保存", style: UIBarButtonItemStyle.Plain, target: self, action:#selector(SBPlayerVC.saveItemDidClick))
+        let item = UIBarButtonItem.init(title: "保存", style: UIBarButtonItemStyle.plain, target: self, action:#selector(SBPlayerVC.saveItemDidClick))
         return item
     }()
     
@@ -42,7 +42,7 @@ class SBPlayerVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         func setupNavBar() {
-            navigationController?.navigationBar.tintColor = UIColor.redColor()
+            navigationController?.navigationBar.tintColor = UIColor.red
             navigationItem.leftBarButtonItem = cancleItem
             navigationItem.rightBarButtonItem = saveItem
         }
@@ -60,8 +60,8 @@ class SBPlayerVC: UIViewController {
                      
             if let playersE = players {
                 let arr = playersE as NSArray
-                let nameArr = arr.valueForKey("name")
-                if nameArr.containsObject(playerName.text) {
+                let nameArr = arr.value(forKey: "name")
+                if (nameArr as AnyObject).contains(playerName.text) {
                     return true
                 } else {
                     return false
@@ -75,8 +75,8 @@ class SBPlayerVC: UIViewController {
             
          let alert = UIAlertView.init(title: "玩家已经存在", message: nil, delegate: nil, cancelButtonTitle: nil)
             
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(800 * NSEC_PER_MSEC)), dispatch_get_main_queue(), {
-                alert.dismissWithClickedButtonIndex(0, animated: true)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(800 * NSEC_PER_MSEC)) / Double(NSEC_PER_SEC), execute: {
+                alert.dismiss(withClickedButtonIndex: 0, animated: true)
             })
             
             alert.show()
@@ -84,7 +84,7 @@ class SBPlayerVC: UIViewController {
         } else {
             delegate?.playerVCDidSavePlayer(playerName.text!)
             
-            dismissViewControllerAnimated(true, completion: nil)
+            dismiss(animated: true, completion: nil)
         }
         
         

@@ -40,25 +40,25 @@ class SBGameSetVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource 
     
     //MARK: delegate
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return (players!.count - 1) / 2
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         return "\(row + 1) "
     }
     
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         wodiCount = row + 1
     }
     
-    @IBAction func starBtnDidClick(sender: AnyObject) {
+    @IBAction func starBtnDidClick(_ sender: AnyObject) {
         
         let vc = SBGameVC()
         
