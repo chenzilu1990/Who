@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let a = 1
         print(a)
         
+        print(a + 1)
+        
         
         window = UIWindow.init(frame: UIScreen.main.bounds)
         
