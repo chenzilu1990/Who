@@ -60,17 +60,20 @@ class SBPlayerVC: UIViewController {
                      
             if let playersE = players {
                 let arr = playersE as NSArray
-                let nameArr = arr.value(forKey: "name")
-                if (nameArr as AnyObject).contains(playerName.text) {
+                let nameArr = arr.value(forKey: "name") as! NSArray
+                print(nameArr.lastObject!)
+                if (nameArr.contains(playerName.text!)) {
                     return true
                 } else {
                     return false
                 }
-                
+            } else {
+                return false
             }
-            return false
-            
+
         }
+            
+        
         if nameIsRepeat() == true {
             
          let alert = UIAlertView.init(title: "玩家已经存在", message: nil, delegate: nil, cancelButtonTitle: nil)
