@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SBWordDisplayVC" customModule="who" customModuleProvider="target">
@@ -14,55 +15,51 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="zDC-BM-Bkb">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZDj-N9-E2B">
-                    <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l24-iy-9CP">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="268"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C9Z-gB-I6m">
-                                    <rect key="frame" x="268" y="118" width="64" height="32.5"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstItem="C9Z-gB-I6m" firstAttribute="centerY" secondItem="l24-iy-9CP" secondAttribute="centerY" id="b1h-yK-37v"/>
                                 <constraint firstItem="C9Z-gB-I6m" firstAttribute="centerX" secondItem="l24-iy-9CP" secondAttribute="centerX" id="uo4-Ss-TAx"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v7k-MZ-Zpf">
-                            <rect key="frame" x="0.0" y="268" width="600" height="268"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KR8-Bd-Llf" customClass="SBCircleBtn" customModule="who" customModuleProvider="target">
-                                    <rect key="frame" x="255" y="89" width="90" height="90"/>
-                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KR8-Bd-Llf" customClass="SBCircleBtn" customModule="who" customModuleProvider="target">
+                                    <frame key="frameInset" minX="129" minY="87" width="90" height="90"/>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="90" id="D6j-gA-b8W"/>
                                         <constraint firstAttribute="width" constant="90" id="Lhn-DM-sKi"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <state key="normal" title="记住了">
-                                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
                                         <action selector="remeberBtnDidClick:" destination="-1" eventType="touchUpInside" id="EY7-gs-CsJ"/>
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="0.94999999999999996" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.94999998807907104" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstItem="KR8-Bd-Llf" firstAttribute="centerY" secondItem="v7k-MZ-Zpf" secondAttribute="centerY" id="tr1-6X-yp5"/>
                                 <constraint firstItem="KR8-Bd-Llf" firstAttribute="centerX" secondItem="v7k-MZ-Zpf" secondAttribute="centerX" id="viA-MN-g9h"/>
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="v7k-MZ-Zpf" secondAttribute="bottom" id="C4w-Y3-Gfv"/>
                         <constraint firstItem="l24-iy-9CP" firstAttribute="top" secondItem="ZDj-N9-E2B" secondAttribute="top" id="HWh-kS-UaJ"/>
@@ -75,7 +72,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="0.90407403519999996" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.90407401323318481" green="0.90407401323318481" blue="0.90407401323318481" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="ZDj-N9-E2B" firstAttribute="top" secondItem="zDC-BM-Bkb" secondAttribute="top" constant="64" id="28E-vi-Seg"/>
                 <constraint firstItem="ZDj-N9-E2B" firstAttribute="leading" secondItem="zDC-BM-Bkb" secondAttribute="leading" id="Ori-cL-Hro"/>

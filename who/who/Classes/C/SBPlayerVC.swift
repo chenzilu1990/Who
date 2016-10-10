@@ -61,7 +61,7 @@ class SBPlayerVC: UIViewController {
             if let playersE = players {
                 let arr = playersE as NSArray
                 let nameArr = arr.value(forKey: "name") as! NSArray
-                print(nameArr.lastObject!)
+                
                 if (nameArr.contains(playerName.text!)) {
                     return true
                 } else {

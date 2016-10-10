@@ -14,7 +14,7 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="玩家昵称" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="N1L-Dy-A9J">
@@ -32,7 +32,7 @@
                 <constraint firstItem="N1L-Dy-A9J" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="74" id="Odf-s0-7ld"/>
                 <constraint firstAttribute="trailing" secondItem="N1L-Dy-A9J" secondAttribute="trailing" id="W7X-QX-0Bo"/>
             </constraints>
-            <point key="canvasLocation" x="180" y="296"/>
+            <point key="canvasLocation" x="55" y="137"/>
         </view>
     </objects>
 </document>
