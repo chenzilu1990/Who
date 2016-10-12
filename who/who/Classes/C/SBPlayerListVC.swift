@@ -127,7 +127,7 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-//            tableView.isEditing = editing
+
         tableView.setEditing(editing, animated: true)
         if editing == true {
             
