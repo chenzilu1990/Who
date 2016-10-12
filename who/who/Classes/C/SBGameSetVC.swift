@@ -12,7 +12,7 @@ class SBGameSetVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource 
 
     @IBOutlet weak var underPicker: UIPickerView!
     
-    var players : [SBPlayer]?
+    var players : [String]?
     var wodiCount : Int?
     
     

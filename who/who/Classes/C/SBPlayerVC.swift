@@ -18,7 +18,7 @@ class SBPlayerVC: UIViewController {
     
     var delegate : SBPlayerVCDelegate?
     
-    var players : [SBPlayer]?
+    var players : NSMutableArray?
     
     @IBOutlet weak var playerName: UITextField!
     

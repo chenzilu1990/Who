@@ -16,7 +16,7 @@ let APPCache = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirecto
 
 
 let playerPath = (APPCache)! + "/player.plist"
- 
+
 
 
 class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSource, SBPlayerVCDelegate {
@@ -31,36 +31,23 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
     
-    var a = { () -> [SBPlayer] in 
-        
-        let arr = NSKeyedUnarchiver.unarchiveObject(withFile: playerPath)
-        
-        if let players = arr {
+    
+    
+    lazy var players : NSMutableArray = {
+    
+//        let arr = NSKeyedUnarchiver.unarchiveObject(withFile: playerPath)
+        let nameArr = NSMutableArray.init(contentsOfFile: playerPath)
+        if let players = nameArr {
             
-            return players as! [SBPlayer]
+            return players
         } else {
-            return [SBPlayer]()
-        }
-        
-        
-    }
-    
-    
-    lazy var players : [SBPlayer] = {
-    
-        let arr = NSKeyedUnarchiver.unarchiveObject(withFile: playerPath)
-        
-        if let players = arr {
-            
-            return players as! [SBPlayer]
-        } else {
-            return [SBPlayer]()
+            return NSMutableArray()
         }
         
     
     }()
     
-    lazy var selPlayers = [SBPlayer]()
+    lazy var selPlayers = [String]()
     
     lazy var addItem : UIBarButtonItem? = {
     
@@ -142,6 +129,7 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
             tableView.isEditing = editing
+//        tableView.setEditing(editing, animated: <#T##Bool#>)
         if editing == true {
             
             starItem.isEnabled = false
@@ -168,6 +156,7 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let vc = SBPlayerVC.init()
         vc.delegate = self
+        
         vc.players = players
         
         let nav = UINavigationController.init(rootViewController: vc)
@@ -201,13 +190,15 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
-//MARK: 代理
+    //MARK:SBPlayerVCDelegate
     
     func playerVCDidSavePlayer(_ name : String) {
         
-        let player = SBPlayer.init(name: name, word: nil)
-        players.append(player)
-        NSKeyedArchiver.archiveRootObject(players, toFile: playerPath)
+//        let player = SBPlayer.init(name: name, word: nil)
+        players.add(name)
+//        NSKeyedArchiver.archiveRootObject(players, toFile: playerPath)
+        players.write(toFile: playerPath, atomically: true)
+        
         func reloadData() {
             tableView .reloadData()
             if players.count > 2 {
@@ -222,7 +213,7 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
     
-    
+    //MARK: UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return players.count
@@ -234,7 +225,7 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             let player = players[(indexPath as NSIndexPath).row]
             
             cell.textLabel?.font = UIFont.systemFont(ofSize: 40)
-            cell.textLabel?.text = player.name
+            cell.textLabel?.text = player as? String
             
             
             return cell
@@ -245,18 +236,19 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
     
-    
-    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
-        return "删除"
-    }
-    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
         players.remove(at: (indexPath as NSIndexPath).row)
-        NSKeyedArchiver.archiveRootObject(players, toFile: playerPath)
+        //        NSKeyedArchiver.archiveRootObject(players, toFile: playerPath)
+        players.write(toFile: playerPath, atomically: true)
         tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
         
         
+    }
+    
+    //MARK UITableViewDelegate
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return "删除"
     }
     
     func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
@@ -296,7 +288,7 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
 
-        selPlayers.append(players[(indexPath as NSIndexPath).row])
+        selPlayers.append(players[(indexPath as NSIndexPath).row] as! String)
         if selPlayers.count > 2 {
             starItem.isEnabled = true
         } else {
@@ -306,8 +298,8 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
 
-        selPlayers.remove(at: selPlayers.index(of: players[(indexPath as NSIndexPath).row])!)
-        
+        selPlayers.remove(at: selPlayers.index(of: selPlayers[indexPath.row])!)
+//        selPlayers.remove(at: selPlayers.index(of: players[]))
         if selPlayers.count > 2 {
             starItem.isEnabled = true
         } else {
@@ -320,14 +312,5 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
    
     
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }
