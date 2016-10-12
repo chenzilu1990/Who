@@ -14,7 +14,7 @@ import UIKit
     func playerVCDidSavePlayer(_ name : String)
 }
 
-class SBPlayerVC: UIViewController {
+class SBPlayerVC: UIViewController,UITextFieldDelegate {
     
     var delegate : SBPlayerVCDelegate?
     
@@ -50,6 +50,7 @@ class SBPlayerVC: UIViewController {
             navigationController?.navigationBar.tintColor = UIColor.red
             navigationItem.leftBarButtonItem = cancleItem
             navigationItem.rightBarButtonItem = saveItem
+//            saveItem.isEnabled = false
         }
         
         self.automaticallyAdjustsScrollViewInsets = false
@@ -107,11 +108,42 @@ class SBPlayerVC: UIViewController {
     
     
     
+    //MARK: UITextFieldDelegate 
     
+//    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+//        return true
+//    }
+//    
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        let str = textField.text! as NSString
+//        if str.length > 0{
+//            saveItem.isEnabled = true
+//        } else {
+//            saveItem.isEnabled = false
+//        }
+//    }
     
-    
-    
-    
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        let str = textField.text! as NSString
+//        
+//        print(range.location)
+//        
+////        if (str.length + 1) > 0{
+////            saveItem.isEnabled = true
+////        } else {
+////            saveItem.isEnabled = false
+////        }
+////        print(str.length)
+//        return true
+//    }
+//    
+//    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+//        return true
+//    }
+//   
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        print("qw")
+//    }
     
     
     
