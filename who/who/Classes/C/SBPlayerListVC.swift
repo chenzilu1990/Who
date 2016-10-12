@@ -16,7 +16,7 @@ let APPCache = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirecto
 
 
 let playerPath = (APPCache)! + "/player.plist"
-
+ 
 
 
 class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSource, SBPlayerVCDelegate {
@@ -28,6 +28,20 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                 noteLabel.isHidden = true
             }
         }
+        
+    }
+    
+    var a = { () -> [SBPlayer] in 
+        
+        let arr = NSKeyedUnarchiver.unarchiveObject(withFile: playerPath)
+        
+        if let players = arr {
+            
+            return players as! [SBPlayer]
+        } else {
+            return [SBPlayer]()
+        }
+        
         
     }
     
