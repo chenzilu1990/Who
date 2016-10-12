@@ -24,8 +24,13 @@ class SBPlayerVC: UIViewController {
     
     
     func cancleItemDidClick() {
+
+        if playerName.canResignFirstResponder {
+            playerName.resignFirstResponder()
+        }
         dismiss(animated: true, completion: nil)
     }
+    
     lazy var cancleItem : UIBarButtonItem = {
         let item = UIBarButtonItem.init(title: "取消", style: UIBarButtonItemStyle.plain, target: self, action: #selector(SBPlayerVC.cancleItemDidClick))
         return item
@@ -46,6 +51,12 @@ class SBPlayerVC: UIViewController {
             navigationItem.leftBarButtonItem = cancleItem
             navigationItem.rightBarButtonItem = saveItem
         }
+        
+        self.automaticallyAdjustsScrollViewInsets = false
+        if playerName.canBecomeFirstResponder {
+            playerName.becomeFirstResponder()
+        }
+
         setupNavBar()
         
     }
@@ -55,14 +66,15 @@ class SBPlayerVC: UIViewController {
     
     
     func saveItemDidClick() {
+        playerName.resignFirstResponder()
         
         func nameIsRepeat() -> Bool {
                      
             if let playersE = players {
-                let arr = playersE as NSArray
-                let nameArr = arr.value(forKey: "name") as! NSArray
+//                let arr = playersE
+//                let nameArr = arr.value(forKey: "name") as! NSArray
                 
-                if (nameArr.contains(playerName.text!)) {
+                if (playersE.contains(playerName.text!)) {
                     return true
                 } else {
                     return false

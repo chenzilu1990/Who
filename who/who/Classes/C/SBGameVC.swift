@@ -13,7 +13,9 @@ class SBGameVC: UITableViewController, UIAlertViewDelegate, SBWordDisplayVCDeleg
     let rowHeight = 80
     let ID = "playerCell"
     
-    var players : [SBPlayer]?
+    var playerNames : [String]?
+    
+    var players = [SBPlayer]()
     var wodiCount : Int?
      
     var curPlayers : [SBPlayer]?
@@ -69,6 +71,15 @@ class SBGameVC: UITableViewController, UIAlertViewDelegate, SBWordDisplayVCDeleg
 
         setupTableView()
         setupNavBar()
+        
+        for obj in playerNames! {
+            let player = SBPlayer.init(name: obj, word: nil)
+            players.append(player)
+            
+        }
+        
+        
+        
         gameRefresh()
         
     }
@@ -83,12 +94,12 @@ class SBGameVC: UITableViewController, UIAlertViewDelegate, SBWordDisplayVCDeleg
         
         let a = Int(arc4random_uniform(UInt32(words.count)))
         
-        let arr = SBRandom().randomWithRange(players!.count, count: wodiCount!)
+        let arr = SBRandom().randomWithRange(players.count, count: wodiCount!)
         
         
         let dic = words[a]
         
-        for (idx , player) in (players?.enumerated())! {
+        for (idx , player) in (players.enumerated()) {
             if arr.contains(idx) {
                 player.word = dic["WD"]
                 player.isWD = true

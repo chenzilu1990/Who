@@ -128,8 +128,8 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-            tableView.isEditing = editing
-//        tableView.setEditing(editing, animated: <#T##Bool#>)
+        tableView.isEditing = editing
+
         if editing == true {
             
             starItem.isEnabled = false
