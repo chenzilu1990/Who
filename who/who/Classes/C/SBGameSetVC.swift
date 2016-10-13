@@ -12,7 +12,7 @@ class SBGameSetVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource 
 
     @IBOutlet weak var underPicker: UIPickerView!
     
-    var players : [SBPlayer]?
+    var players : [String]?
     var wodiCount : Int?
     
     
@@ -62,7 +62,7 @@ class SBGameSetVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource 
         
         let vc = SBGameVC()
         
-        vc.players = players
+        vc.playerNames = players
         vc.wodiCount = wodiCount
         navigationController?.pushViewController(vc, animated: true)
         
