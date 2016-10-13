@@ -90,6 +90,7 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("hehe")
         view.addSubview(tableView)
         func setupNavBar() {
             navigationController?.navigationBar.tintColor = UIColor.red
