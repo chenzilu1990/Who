@@ -72,8 +72,7 @@ class SBPlayerVC: UIViewController,UITextFieldDelegate {
         func nameIsRepeat() -> Bool {
                      
             if let playersE = players {
-//                let arr = playersE
-//                let nameArr = arr.value(forKey: "name") as! NSArray
+ 
                 
                 if (playersE.contains(playerName.text!)) {
                     return true

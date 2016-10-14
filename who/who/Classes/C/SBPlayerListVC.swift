@@ -10,8 +10,7 @@ import UIKit
 
 let ScreenFrame = UIScreen.main.bounds
 let ID = "playerCell"
-//let APPCache = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first
-//let playerPath = (APPCache)! + "/player.plist"
+
 
 class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSource, SBPlayerVCDelegate {
 
@@ -170,7 +169,7 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         players?.add(name)
 
-//        players?.write(toFile: playerPath, atomically: true)
+
         
         func reloadData() {
             tableView .reloadData()
@@ -213,7 +212,7 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         
         players?.removeObject(at: indexPath.row)
-//        players?.write(toFile: playerPath, atomically: true)
+
         tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
         
         
