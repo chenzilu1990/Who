@@ -9,43 +9,22 @@
 import UIKit
 
 let ScreenFrame = UIScreen.main.bounds
-
 let ID = "playerCell"
-
 let APPCache = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first
-
-
 let playerPath = (APPCache)! + "/player.plist"
-
-
 
 class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSource, SBPlayerVCDelegate {
 
     @IBOutlet weak var noteLabel: UILabel! {
-        
+    
         didSet {
-            if players.count > 2 {
+            if players!.count > 2 {
                 noteLabel.isHidden = true
             }
         }
-        
     }
     
-    
-    
-    lazy var players : NSMutableArray = {
-    
-//        let arr = NSKeyedUnarchiver.unarchiveObject(withFile: playerPath)
-        let nameArr = NSMutableArray.init(contentsOfFile: playerPath)
-        if let players = nameArr {
-            
-            return players
-        } else {
-            return NSMutableArray()
-        }
-        
-    
-    }()
+    var players : NSMutableArray?
     
     lazy var selPlayers = [String]()
     
@@ -74,7 +53,6 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     lazy var tableView : UITableView = {
-       
         let tableView = UITableView.init(frame: ScreenFrame, style: UITableViewStyle.plain)
         tableView.delegate = self
         tableView.dataSource = self
@@ -90,36 +68,29 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("hehe")
-        print("qweqw")
+        
         view.addSubview(tableView)
         func setupNavBar() {
             navigationController?.navigationBar.tintColor = UIColor.red
             navigationItem.title = "玩家"
-            if players.count > 2 {
+            if (players?.count)! > 2 {
                 
                 navigationItem.leftBarButtonItem = editItem
             } else {
                 navigationItem.leftBarButtonItem = nil
             }
             navigationItem.rightBarButtonItem = addItem
-            
-        }
+         }
         setupNavBar()
         
         func setupTooBar() {
-            
             navigationController?.toolbar.tintColor = UIColor.red
-            
             let item = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
-            
-            toolbarItems = [item, starItem, item]
-            
-        }
+             toolbarItems = [item, starItem, item]
+         }
         setupTooBar()
         
         setEditing(false, animated: false)
-        
         
     }
     
@@ -196,14 +167,14 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func playerVCDidSavePlayer(_ name : String) {
         
-//        let player = SBPlayer.init(name: name, word: nil)
-        players.add(name)
-//        NSKeyedArchiver.archiveRootObject(players, toFile: playerPath)
-        players.write(toFile: playerPath, atomically: true)
+
+        players?.add(name)
+
+        players?.write(toFile: playerPath, atomically: true)
         
         func reloadData() {
             tableView .reloadData()
-            if players.count > 2 {
+            if (players?.count)! > 2 {
                 noteLabel.isHidden = true
                 navigationItem.leftBarButtonItem = editItem
             } else {
@@ -218,13 +189,13 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     //MARK: UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return players.count
+        return players!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: ID) {
             
-            let player = players[(indexPath as NSIndexPath).row]
+            let player = players?[(indexPath as NSIndexPath).row]
             
             cell.textLabel?.font = UIFont.systemFont(ofSize: 40)
             cell.textLabel?.text = player as? String
@@ -240,9 +211,9 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
-        players.remove(at: (indexPath as NSIndexPath).row)
-        //        NSKeyedArchiver.archiveRootObject(players, toFile: playerPath)
-        players.write(toFile: playerPath, atomically: true)
+        players?.remove(at: (indexPath as NSIndexPath).row)
+        
+        players?.write(toFile: playerPath, atomically: true)
         tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
         
         
@@ -255,7 +226,7 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
         navigationItem.rightBarButtonItem = addItem
-        if players.count > 2 {
+        if (players?.count)! > 2 {
             noteLabel.isHidden = true
             editItem.title = "选择"
             } else {
@@ -290,7 +261,7 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
 
-        selPlayers.append(players[(indexPath as NSIndexPath).row] as! String)
+        selPlayers.append(players?[(indexPath as NSIndexPath).row] as! String)
         if selPlayers.count > 2 {
             starItem.isEnabled = true
         } else {
@@ -301,7 +272,7 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
 
         selPlayers.remove(at: selPlayers.index(of: selPlayers[indexPath.row])!)
-//        selPlayers.remove(at: selPlayers.index(of: players[]))
+
         if selPlayers.count > 2 {
             starItem.isEnabled = true
         } else {
