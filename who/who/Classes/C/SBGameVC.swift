@@ -143,7 +143,7 @@ class SBGameVC: UITableViewController, UIAlertViewDelegate, SBWordDisplayVCDeleg
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let playerCell = tableView.dequeueReusableCell(withIdentifier: ID) as! SBGameCell
         
-        playerCell.player = curPlayers![(indexPath as NSIndexPath).row]
+        playerCell.player = curPlayers![indexPath.row]
         
         
         return playerCell
@@ -151,7 +151,7 @@ class SBGameVC: UITableViewController, UIAlertViewDelegate, SBWordDisplayVCDeleg
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let player = curPlayers![(indexPath as NSIndexPath).row]
+        let player = curPlayers![indexPath.row]
         player.isRead = true
         let vc = SBWordDisplayVC()
         vc.navigationItem.title = player.name
@@ -173,7 +173,7 @@ class SBGameVC: UITableViewController, UIAlertViewDelegate, SBWordDisplayVCDeleg
         outPlayerIndex = indexPath
         
         func pandunWithIndex(_ indexPath : IndexPath) {
-            let player = curPlayers![(indexPath as NSIndexPath).row]
+            let player = curPlayers![indexPath.row]
             curPlayers?.remove(at: (curPlayers?.index(of: player))!)
             
             if (player.isWD)! == true {

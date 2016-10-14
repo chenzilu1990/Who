@@ -195,7 +195,7 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: ID) {
             
-            let player = players?[(indexPath as NSIndexPath).row]
+            let player = players?[indexPath.row]
             
             cell.textLabel?.font = UIFont.systemFont(ofSize: 40)
             cell.textLabel?.text = player as? String
@@ -261,7 +261,7 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
 
-        selPlayers.append(players?[(indexPath as NSIndexPath).row] as! String)
+        selPlayers.append(players?[indexPath.row] as! String)
         if selPlayers.count > 2 {
             starItem.isEnabled = true
         } else {
