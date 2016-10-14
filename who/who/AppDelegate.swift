@@ -8,6 +8,9 @@
 import UIKit
 
 
+let APPCache = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first
+let playerPath = (APPCache)! + "/player.plist"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -63,6 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
+        players.write(toFile: playerPath, atomically: true)
         print("applicationWillTerminate")
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
