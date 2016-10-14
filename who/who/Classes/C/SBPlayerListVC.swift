@@ -262,7 +262,10 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 
 
         selPlayers.append(players?[indexPath.row] as! String)
-        if selPlayers.count > 2 {
+        selPlayers.sort { (str1, str2) -> Bool in
+            return (str1.compare(str2).rawValue == -1)
+        }
+         if selPlayers.count > 2 {
             starItem.isEnabled = true
         } else {
             starItem.isEnabled = false
