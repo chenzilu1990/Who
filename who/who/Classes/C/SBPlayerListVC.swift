@@ -240,10 +240,10 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
-        players.remove(at: (indexPath as NSIndexPath).row)
-        //        NSKeyedArchiver.archiveRootObject(players, toFile: playerPath)
+        players.removeObject(at: (indexPath as NSIndexPath).row)
+
         players.write(toFile: playerPath, atomically: true)
-        tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+        tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.top)
         
         
     }
