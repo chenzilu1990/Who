@@ -169,7 +169,8 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         players?.add(name)
 
-
+        players?.sort(using: #selector(NSNumber.compare(_:)))
+//        players.sor
         
         func reloadData() {
             tableView .reloadData()

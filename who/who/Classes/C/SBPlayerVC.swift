@@ -67,7 +67,7 @@ class SBPlayerVC: UIViewController,UITextFieldDelegate {
     
     
     func saveItemDidClick() {
-        playerName.resignFirstResponder()
+//        playerName.resignFirstResponder()
         
         func nameIsRepeat() -> Bool {
                      
@@ -98,7 +98,10 @@ class SBPlayerVC: UIViewController,UITextFieldDelegate {
             return
         } else {
             delegate?.playerVCDidSavePlayer(playerName.text!)
-            
+            if playerName.canResignFirstResponder {
+                playerName.resignFirstResponder()
+            }
+
             dismiss(animated: true, completion: nil)
         }
         
