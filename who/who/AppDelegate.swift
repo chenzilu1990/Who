@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    var players : NSMutableArray = {
+    let players : NSMutableArray = {
         
         
         let nameArr = NSMutableArray(contentsOfFile: playerPath)
@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow.init(frame: UIScreen.main.bounds)
         
-//        SBPlayerListVC()
+
         
         let rootVC = SBPlayerListVC()
         rootVC.players = players

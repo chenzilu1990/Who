@@ -25,11 +25,12 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var players : NSMutableArray?
     
-    lazy var selPlayers = [String]()
+    var selPlayers = [String]()
     
     lazy var addItem : UIBarButtonItem? = {
     
-        let item = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(SBPlayerListVC.addItemDidClick))
+        let item = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(addItemDidClick))
+        
         return item
         
        
@@ -72,13 +73,12 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         func setupNavBar() {
             navigationController?.navigationBar.tintColor = UIColor.red
             navigationItem.title = "玩家"
+            navigationItem.rightBarButtonItem = addItem
             if (players?.count)! > 2 {
-                
                 navigationItem.leftBarButtonItem = editItem
             } else {
                 navigationItem.leftBarButtonItem = nil
             }
-            navigationItem.rightBarButtonItem = addItem
          }
         setupNavBar()
         

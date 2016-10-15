@@ -22,10 +22,10 @@ class SBGameVC: UITableViewController, UIAlertViewDelegate, SBWordDisplayVCDeleg
     var isGameOver : Bool?
     
         
-    lazy var WDPlayers = [SBPlayer]()
-    lazy var PMPlayers = [SBPlayer]()
-    lazy var audioPlayer = SBAudioPlayer()
-    lazy var outPlayerIndex = IndexPath()
+    var WDPlayers = [SBPlayer]()
+    var PMPlayers = [SBPlayer]()
+    var audioPlayer = SBAudioPlayer()
+    var outPlayerIndex = IndexPath()
     
     var words : [[String : String]]{
         

@@ -23,7 +23,7 @@ class SBWordDisplayVC: UIViewController {
     
     var delegate : SBWordDisplayVCDelegate?
     
-    lazy var leftItem : UIBarButtonItem = {
+    var leftItem : UIBarButtonItem = {
        
         let item = UIBarButtonItem.init(title: "", style: UIBarButtonItemStyle.plain, target: self, action: nil)
         return item

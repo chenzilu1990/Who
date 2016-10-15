@@ -23,23 +23,18 @@ class SBPlayerVC: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var playerName: UITextField!
     
     
-    func cancleItemDidClick() {
-
-        if playerName.canResignFirstResponder {
-            playerName.resignFirstResponder()
-        }
-        dismiss(animated: true, completion: nil)
-    }
     
-    lazy var cancleItem : UIBarButtonItem = {
+    
+    var cancleItem : UIBarButtonItem = {
         let item = UIBarButtonItem.init(title: "取消", style: UIBarButtonItemStyle.plain, target: self, action: #selector(SBPlayerVC.cancleItemDidClick))
         return item
     }()
     
     
-    lazy var saveItem : UIBarButtonItem = {
+    var saveItem : UIBarButtonItem = {
     
         let item = UIBarButtonItem.init(title: "保存", style: UIBarButtonItemStyle.plain, target: self, action:#selector(SBPlayerVC.saveItemDidClick))
+        print(self)
         return item
     }()
     
@@ -64,7 +59,13 @@ class SBPlayerVC: UIViewController,UITextFieldDelegate {
 
     
     
-    
+    func cancleItemDidClick() {
+        
+        if playerName.canResignFirstResponder {
+            playerName.resignFirstResponder()
+        }
+        dismiss(animated: true, completion: nil)
+    }
     
     func saveItemDidClick() {
 //        playerName.resignFirstResponder()
