@@ -48,11 +48,7 @@ class SBGameVC: UITableViewController, UIAlertViewDelegate, SBWordDisplayVCDeleg
         
     }()
         
-        
-        
-
-    
-
+  
 //    MARK: 生命周期
     
     override func viewDidLoad() {
@@ -78,14 +74,9 @@ class SBGameVC: UITableViewController, UIAlertViewDelegate, SBWordDisplayVCDeleg
             
         }
         
-        
-        
         gameRefresh()
         
     }
-    
-    
-    
     
     func gameRefresh() {
         WDPlayers.removeAll()
@@ -249,9 +240,7 @@ class SBGameVC: UITableViewController, UIAlertViewDelegate, SBWordDisplayVCDeleg
         }
     }
     
-    
-    
-    
+       
     
 }
 

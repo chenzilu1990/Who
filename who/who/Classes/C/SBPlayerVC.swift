@@ -4,7 +4,7 @@
 //
 //  Created by chenzilu on 16/7/16.
 //  Copyright © 2016年 chenzilu. All rights reserved.
-//
+
 
 import UIKit
 
@@ -22,9 +22,7 @@ class SBPlayerVC: UIViewController,UITextFieldDelegate {
     
     @IBOutlet weak var playerName: UITextField!
     
-    
-    
-    
+     
     var cancleItem : UIBarButtonItem = {
         let item = UIBarButtonItem.init(title: "取消", style: UIBarButtonItemStyle.plain, target: self, action: #selector(SBPlayerVC.cancleItemDidClick))
         return item
@@ -37,17 +35,15 @@ class SBPlayerVC: UIViewController,UITextFieldDelegate {
         print(self)
         return item
     }()
-    
-    
+       
     override func viewDidLoad() {
         super.viewDidLoad()
         func setupNavBar() {
             navigationController?.navigationBar.tintColor = UIColor.red
             navigationItem.leftBarButtonItem = cancleItem
             navigationItem.rightBarButtonItem = saveItem
-//            saveItem.isEnabled = false
+
         }
-        
         self.automaticallyAdjustsScrollViewInsets = false
         if playerName.canBecomeFirstResponder {
             playerName.becomeFirstResponder()
@@ -56,8 +52,6 @@ class SBPlayerVC: UIViewController,UITextFieldDelegate {
         setupNavBar()
         
     }
-
-    
     
     func cancleItemDidClick() {
         
@@ -68,8 +62,7 @@ class SBPlayerVC: UIViewController,UITextFieldDelegate {
     }
     
     func saveItemDidClick() {
-//        playerName.resignFirstResponder()
-        
+ 
         func nameIsRepeat() -> Bool {
                      
             if let playersE = players {
@@ -105,8 +98,6 @@ class SBPlayerVC: UIViewController,UITextFieldDelegate {
 
             dismiss(animated: true, completion: nil)
         }
-        
-        
     }
     
     

@@ -4,7 +4,7 @@
 //
 //  Created by chenzilu on 16/7/12.
 //  Copyright © 2016年 chenzilu. All rights reserved.
-//
+
 
 import UIKit
 
@@ -24,33 +24,24 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     var players : NSMutableArray?
-    
     var selPlayers = [String]()
     
     lazy var addItem : UIBarButtonItem? = {
-    
-        let item = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(addItemDidClick))
-        
+    let item = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(addItemDidClick))
         return item
-        
-       
         
     }()
     
     lazy var editItem : UIBarButtonItem = {
-        
         let item = UIBarButtonItem.init(title: "选择", style: UIBarButtonItemStyle.plain, target: self, action: #selector(SBPlayerListVC.editItemDidClick))
         return item
         
     }()
     
     lazy var starItem : UIBarButtonItem = {
-       
-        let item = UIBarButtonItem.init(title: "开始游戏", style: UIBarButtonItemStyle.plain, target: self, action: #selector(SBPlayerListVC.starItemDidClick))
-        
-        return item
+         let item = UIBarButtonItem.init(title: "开始游戏", style: UIBarButtonItemStyle.plain, target: self, action: #selector(SBPlayerListVC.starItemDidClick))
+          return item
     }()
-    
     
     lazy var tableView : UITableView = {
         let tableView = UITableView.init(frame: ScreenFrame, style: UITableViewStyle.plain)
@@ -68,7 +59,6 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.addSubview(tableView)
         func setupNavBar() {
             navigationController?.navigationBar.tintColor = UIColor.red
@@ -81,14 +71,12 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
          }
         setupNavBar()
-        
         func setupTooBar() {
             navigationController?.toolbar.tintColor = UIColor.red
             let item = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
              toolbarItems = [item, starItem, item]
          }
         setupTooBar()
-        
         setEditing(false, animated: false)
         
     }
@@ -100,20 +88,15 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
- 
         tableView.setEditing(editing, animated: true)
         if editing == true {
-            
             starItem.isEnabled = false
             selPlayers.removeAll()
-
             navigationItem.rightBarButtonItem = nil
-
             editItem.title = "取消"
             tableView.contentInset = UIEdgeInsetsMake(64, 0, 45, 0)
         } else {
             navigationItem.rightBarButtonItem = addItem
-
             editItem.title = "选择"
             tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
         }
@@ -121,56 +104,36 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
 // MARK: 监听
-    
-
+   
     func addItemDidClick()  {
-        
-        
         let vc = SBPlayerVC.init()
         vc.delegate = self
-        
         vc.players = players
-        
         let nav = UINavigationController.init(rootViewController: vc)
-        
-        
         present(nav, animated: true, completion: nil)
-        
         
     }
     
     func editItemDidClick() {
-        
         if editItem.title == "完成" {
             setEditing(false, animated: true)
         } else {
-            
             setEditing(!isEditing, animated: true)
         }
-        
     }
     
     func starItemDidClick() {
-        
         let vc = SBGameSetVC.init()
         vc.players = selPlayers
-        
         navigationController?.setToolbarHidden(true, animated: false)
         navigationController?.pushViewController(vc, animated: true)
-        
-             
     }
-    
-    
     //MARK:SBPlayerVCDelegate
     
     func playerVCDidSavePlayer(_ name : String) {
-        
-
         players?.add(name)
 
         players?.sort(using: #selector(NSNumber.compare(_:)))
-//        players.sor
         
         func reloadData() {
             tableView .reloadData()
@@ -183,12 +146,10 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
         reloadData()
-        
     }
     
     //MARK: UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return players!.count
     }
     
@@ -196,27 +157,18 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         if let cell = tableView.dequeueReusableCell(withIdentifier: ID) {
             
             let player = players?[indexPath.row]
-            
             cell.textLabel?.font = UIFont.systemFont(ofSize: 40)
             cell.textLabel?.text = player as? String
-            
-            
             return cell
         } else {
             return UITableViewCell.init()
         }
-         
-        
+     
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        
-        
         players?.removeObject(at: indexPath.row)
-
         tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
-        
-        
     }
     
     //MARK UITableViewDelegate
@@ -236,10 +188,8 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     }
     
-    
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        
-        
+     
         if tableView.isEditing == false {
             navigationItem.rightBarButtonItem = nil
             editItem.title = "完成"
@@ -248,19 +198,12 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             return UITableViewCellEditingStyle.delete
         } else {
             return UITableViewCellEditingStyle.init(rawValue: UITableViewCellEditingStyle.delete.rawValue | UITableViewCellEditingStyle.insert.rawValue)!
-
-        }
-        
-        
+         }
         
     }
     
-    
- 
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-
+ 
         selPlayers.append(players?[indexPath.row] as! String)
         selPlayers.sort { (str1, str2) -> Bool in
             return (str1.compare(str2).rawValue == -1)
@@ -282,11 +225,6 @@ class SBPlayerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             starItem.isEnabled = false
         }
     }
-    
-    
-    
-   
-    
     
     
 }
