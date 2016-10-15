@@ -16,10 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    lazy var players : NSMutableArray = {
+    var players : NSMutableArray = {
         
         
-        let nameArr = NSMutableArray.init(contentsOfFile: playerPath)
+        let nameArr = NSMutableArray(contentsOfFile: playerPath)
         if let players = nameArr {
             
             return players
@@ -31,10 +31,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        print("didFinishLaunchingWithOptions")
+        
         window = UIWindow.init(frame: UIScreen.main.bounds)
         
-        SBPlayerListVC.initialize()
+//        SBPlayerListVC()
         
         let rootVC = SBPlayerListVC()
         rootVC.players = players
@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        print("applicationDidEnterBackground")
+        
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
@@ -67,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         players.write(toFile: playerPath, atomically: true)
-        print("applicationWillTerminate")
+        
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 

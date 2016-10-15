@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SBPlayer: NSObject,NSCoding {
+class SBPlayer: NSObject  {
 
     var name : String?
     var word : String?
@@ -21,28 +21,28 @@ class SBPlayer: NSObject,NSCoding {
         super.init()
     }
     
-    func encode(with aCoder: NSCoder) {
-        
-        aCoder.encode(name, forKey: "name")
-        aCoder.encode(word, forKey: "word")
-        if let iswd = isWD {
-            aCoder.encode(iswd, forKey: "isWD")
-        }
-        
-        if let isread = isRead {
-            aCoder.encode(isread, forKey: "isRead")
-        }
-//        aCoder.encodeBool(isWD!, forKey: "isWD")
-//        aCoder.encodeBool(isRead!, forKey: "isRead")
-    }
+//    func encode(with aCoder: NSCoder) {
+//        
+//        aCoder.encode(name, forKey: "name")
+//        aCoder.encode(word, forKey: "word")
+//        if let iswd = isWD {
+//            aCoder.encode(iswd, forKey: "isWD")
+//        }
+//        
+//        if let isread = isRead {
+//            aCoder.encode(isread, forKey: "isRead")
+//        }
+////        aCoder.encodeBool(isWD!, forKey: "isWD")
+////        aCoder.encodeBool(isRead!, forKey: "isRead")
+//    }
     
-    required init?(coder aDecoder: NSCoder) {
-        name = aDecoder.decodeObject(forKey: "name") as? String
-        word = aDecoder.decodeObject(forKey: "word") as? String
-        isWD = aDecoder.decodeBool(forKey: "isWD")
-        isRead = aDecoder.decodeBool(forKey: "isRead")
-        super.init()
-        
-    }
+//    required init?(coder aDecoder: NSCoder) {
+//        name = aDecoder.decodeObject(forKey: "name") as? String
+//        word = aDecoder.decodeObject(forKey: "word") as? String
+//        isWD = aDecoder.decodeBool(forKey: "isWD")
+//        isRead = aDecoder.decodeBool(forKey: "isRead")
+//        super.init()
+//        
+//    }
     
 }
