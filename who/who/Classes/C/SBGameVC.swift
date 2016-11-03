@@ -229,7 +229,7 @@ class SBGameVC: UITableViewController, UIAlertViewDelegate, SBWordDisplayVCDeleg
             if buttonIndex == 0 {
                 gameRefresh()
             } else {
-                navigationController?.popViewController(animated: true)
+              _ = navigationController?.popViewController(animated: true)
             }
         } else {
             

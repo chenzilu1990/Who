@@ -45,7 +45,7 @@ class SBWordDisplayVC: UIViewController {
     
     @IBAction func remeberBtnDidClick(_ sender: AnyObject) {
  
-       navigationController?.popViewController(animated: true)
+      _ = navigationController?.popViewController(animated: true)
         
         delegate?.wordDisplayDidRemeberPlayer()
     }
